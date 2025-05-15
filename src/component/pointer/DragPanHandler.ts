@@ -128,10 +128,6 @@ export class DragPanHandler extends HandlerBase<PointerConfiguration> {
                         return false;
                     }));
 
-        let isPano$ = this._navigator.stateService.currentState$.pipe(map((frame) => {
-          return isSpherical(frame.state.currentImage.cameraType);
-        }));
-
         this._activeTouchSubscription = observableMerge(
             touchMovingStarted$,
             touchMovingStopped$)
@@ -176,16 +172,14 @@ export class DragPanHandler extends HandlerBase<PointerConfiguration> {
             withLatestFrom(
                 this._container.renderService.renderCamera$,
                 this._navigator.stateService.currentTransform$,
-                this._navigator.panService.panImages$,
-                isPano$),
+                this._navigator.panService.panImages$),
             map(
-                ([events, render, transform, nts, isPano]:
+                ([events, render, transform, nts]:
                     [
                         MouseTouchPair,
                         RenderCamera,
                         Transform,
                         [Image, Transform, number][],
-                        boolean,
                     ]): EulerRotation => {
                     let previousEvent: MouseEvent | Touch = events[0];
                     let event: MouseEvent | Touch = events[1];
@@ -237,22 +231,19 @@ export class DragPanHandler extends HandlerBase<PointerConfiguration> {
                     }
 
                     if (distances[0] > 0 && theta < 0) {
-                        theta /= Math.max(1, 2e2 * distances[0]);
+                        theta /= Math.max(1, 1e4 * distances[0]);
                     }
 
                     if (distances[2] > 0 && theta > 0) {
-                        theta /= Math.max(1, 2e2 * distances[2]);
+                        theta /= Math.max(1, 1e4 * distances[2]);
                     }
 
                     if (distances[1] > 0 && phi < 0) {
-                        phi /= Math.max(1, 2e2 * distances[1]);
+                        phi /= Math.max(1, 1e4 * distances[1]);
                     }
 
                     if (distances[3] > 0 && phi > 0) {
-                        phi /= Math.max(1, 2e2 * distances[3]);
-                    }
-                    if (isPano) {
-                      return { phi: phi, theta: theta };
+                        phi /= Math.max(1, 1e4 * distances[3]);
                     }
                     return { phi: phi, theta: 0 };
                 }),
