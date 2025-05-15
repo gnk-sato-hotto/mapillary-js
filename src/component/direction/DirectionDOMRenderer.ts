@@ -111,9 +111,11 @@ export class DirectionDOMRenderer {
         if (isSpherical(this._image.cameraType)) {
             // steps = steps.concat(this._createSphericalArrows(navigator, rotation));
         } else {
+            /*
             steps = steps.concat(
                 this._createPerspectiveToSphericalArrows(navigator, rotation));
-            // steps = steps.concat(this._createStepArrows(navigator, rotation));
+            steps = steps.concat(this._createStepArrows(navigator, rotation));
+            */
             turns = turns.concat(this._createTurnArrows(navigator));
         }
 
