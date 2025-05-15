@@ -245,7 +245,7 @@ export class DragPanHandler extends HandlerBase<PointerConfiguration> {
                     if (distances[3] > 0 && phi > 0) {
                         phi /= Math.max(1, 1e4 * distances[3]);
                     }
-                    return { phi: phi, theta: 0 };
+                    return { phi: phi, theta: theta };
                 }),
             share());
 
