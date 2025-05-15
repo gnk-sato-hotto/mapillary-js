@@ -185,6 +185,7 @@ export class DragPanHandler extends HandlerBase<PointerConfiguration> {
                         RenderCamera,
                         Transform,
                         [Image, Transform, number][],
+                        boolean,
                     ]): EulerRotation => {
                     let previousEvent: MouseEvent | Touch = events[0];
                     let event: MouseEvent | Touch = events[1];
