@@ -293,7 +293,7 @@ export class Graph {
         this._requiredSpatialArea = {};
 
         this._sequences = {};
-        this._tileThreshold = 20;
+        this._tileThreshold = 10;
     }
 
     public static register(spatialIndex: new (...args: any[]) => any): void {
