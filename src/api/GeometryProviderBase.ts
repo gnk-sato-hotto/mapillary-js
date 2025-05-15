@@ -101,7 +101,7 @@ export abstract class GeometryProviderBase implements IGeometryProvider {
                 centerLat,
                 0);
 
-        //const threshold = Math.max(enu[0], enu[1]);
+        /** const threshold = Math.max(enu[0], enu[1]); */
         const threshold = 0.74;
 
         return this._lngLatToCellIds(
